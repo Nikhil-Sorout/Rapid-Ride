@@ -16,7 +16,7 @@ const pusher = new Pusher({
     cluster: process.env.APP_CLUSTER || '',
 })
 
-app.get('/home', async(req: express.Request, res: express.Response)=>{
+app.get('/', async(req: express.Request, res: express.Response)=>{
     res.json({message: "Hello from the server"})
     // console.log(res);
 })
