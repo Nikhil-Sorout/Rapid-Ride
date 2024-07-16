@@ -27,7 +27,7 @@ const pusher = new pusher_1.default({
     secret: process.env.APP_SECRET || '',
     cluster: process.env.APP_CLUSTER || '',
 });
-app.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get('/home', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.send(`Hey I am here`);
     // console.log(res);
 }));
