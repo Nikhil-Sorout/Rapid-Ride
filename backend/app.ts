@@ -16,13 +16,13 @@ const pusher = new Pusher({
     cluster: process.env.APP_CLUSTER || '',
 })
 
-app.get('/home', async(req, res)=>{
+app.get('/home', async(req: express.Request, res: express.Response)=>{
     res.send(`Hey I am here`)
     // console.log(res);
 })
 
 // for authenticating users
-app.get('/pusher/auth', async(req, res)=>{
+app.get('/pusher/auth', async(req: express.Request, res: express.Response)=>{
     const query = req.query;
     const socketId = query.socket_id as string;
     const channel = query.channel_name as string;
