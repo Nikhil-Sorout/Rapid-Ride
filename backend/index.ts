@@ -17,7 +17,7 @@ const pusher = new Pusher({
 })
 
 app.get('/home', async(req: express.Request, res: express.Response)=>{
-    res.send(`Hey I am here`)
+    res.json({message: "Hello from the server"})
     // console.log(res);
 })
 
