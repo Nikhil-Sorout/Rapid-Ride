@@ -28,7 +28,7 @@ const pusher = new pusher_1.default({
     cluster: process.env.APP_CLUSTER || '',
 });
 app.get('/home', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.send(`Hey I am here`);
+    res.json({ message: "Hello from the server" });
     // console.log(res);
 }));
 // for authenticating users
