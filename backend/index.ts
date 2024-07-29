@@ -26,8 +26,8 @@ app.use(cors())
 app.use(bodyParser.urlencoded({extended : true}))
 
 
-app.get('/hey', async(req: express.Request, res: express.Response)=>{
-    res.send("Hello from the server")
+app.get('/', async(req: express.Request, res: express.Response)=>{
+    return res.send("Hello")
     // console.log(res);
 })
 
