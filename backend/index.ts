@@ -6,7 +6,6 @@ import dotenv from 'dotenv'
 import { Server, Socket } from 'socket.io'
 import { DefaultEventsMap } from 'socket.io/dist/typed-events'
 import {connectDb} from './config/dbConfig'
-
 dotenv.config()
 
 const app = express()
@@ -22,17 +21,22 @@ app.use(cors())
 app.use(bodyParser.urlencoded({extended : true}))
 
 
-const io = new Server(server, {
-    cors:{
-        origin: "https://rapid-ride.vercel.app/",
-        methods: ["GET", "POST"]
-    }
-})
+const io = new Server(server)
 
-io.on("connection",(socket:Socket<DefaultEventsMap>)=>{
+io.on("connection",(socket)=>{
     console.log("A user is connected");
+
+    socket.on("joinRoom", (room)=>{
+        socket.join(room);
+        console.log(`User joined ${room}`);
+    })
+
+    socket.on("disconnect",()=>{
+        console.log('User disconnected');
+    })
 })
 
+app.use("/api/common", require('./routes/commonRoutes'))
 app.use("/api/passengers", require('./routes/userRoutes'))
 app.use("/api/drivers", require('./routes/driverRoutes'))
 

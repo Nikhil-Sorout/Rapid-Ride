@@ -4,7 +4,6 @@ const driverSchema = new mongoose.Schema({
     userName: {
         type: String,
         required: true,
-        unique: true
     },
     password: {
         type: String,
@@ -12,7 +11,8 @@ const driverSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     dlNumber:{
         type: String,
@@ -25,9 +25,14 @@ const driverSchema = new mongoose.Schema({
     model:{
         type: String
     },
+    isDriver:{
+        type: Boolean,
+        required: true
+    },
     email: {
         type: String,
+        unique: true
     }
 })
 
-module.exports = mongoose.model('Driver', driverSchema)
+export default mongoose.model('Driver', driverSchema)

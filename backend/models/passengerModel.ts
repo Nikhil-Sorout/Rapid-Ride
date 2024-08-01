@@ -4,7 +4,6 @@ const userSchema = new mongoose.Schema({
     userName: {
         type: String,
         required: true,
-        unique: true
     },
     password: {
         type: String,
@@ -12,7 +11,8 @@ const userSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     street:{
         type: String,
@@ -30,8 +30,13 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    isDriver:{
+        type: Boolean,
+        required: true
+    },
     email:{
         type: String,
+        unique: true
     },
 })
 

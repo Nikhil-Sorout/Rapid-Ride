@@ -18,15 +18,18 @@ const port = process.env.PORT || 5000;
 app.use(body_parser_1.default.json());
 app.use((0, cors_1.default)());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
-const io = new socket_io_1.Server(server, {
-    cors: {
-        origin: "https://rapid-ride.vercel.app/",
-        methods: ["GET", "POST"]
-    }
-});
+const io = new socket_io_1.Server(server);
 io.on("connection", (socket) => {
     console.log("A user is connected");
+    socket.on("joinRoom", (room) => {
+        socket.join(room);
+        console.log(`User joined ${room}`);
+    });
+    socket.on("disconnect", () => {
+        console.log('User disconnected');
+    });
 });
+app.use("/api/common", require('./routes/commonRoutes'));
 app.use("/api/passengers", require('./routes/userRoutes'));
 app.use("/api/drivers", require('./routes/driverRoutes'));
 server.listen(port, () => {

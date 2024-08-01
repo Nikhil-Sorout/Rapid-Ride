@@ -14,7 +14,7 @@ const SignUp = () => {
 
   const verifyEmail = async () => {
     try {
-      const response = await axios.get(`http://${localhost}/api/drivers/emailVerification`,
+      const response = await axios.get(`http://${localhost}/api/common/emailVerification`,
         {params :{email : email}}
       )
       console.log(response);

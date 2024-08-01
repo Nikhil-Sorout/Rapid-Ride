@@ -5,43 +5,12 @@ dotenv.config();
 import User from '../models/passengerModel'
 import bcrypt from 'bcrypt'
 
-// @desc Verify number
-// @route GET /api/passengers/numberVerification
-// @access public
-
-export const verifyNumber = async (req: Request, res: Response) => {
-    const number = req.query.number;
-    console.log(number);
-
-    const options = {
-        method: 'GET',
-        url: 'https://phonenumbervalidatefree.p.rapidapi.com/ts_PhoneNumberValidateTest.jsp',
-        params: {
-            number: number,
-        },
-        headers: {
-            'x-rapidapi-key': process.env.RAPID_API_KEY,
-            'x-rapidapi-host': 'phonenumbervalidatefree.p.rapidapi.com'
-        }
-    };
-    try {
-        const response = await axios.request(options);
-        if (response.status == 200) {
-            console.log(response.data);
-            res.json(response.data).status(200);
-        }
-    }
-    catch (err) {
-        console.log(err);
-    }
-}
-
-// @desc Sign up a new user
+// @desc Sign up a new passenger
 // @route POST /api/passengers/signup
 // @access public
-export const signupUser = async (req: Request, res: Response) => {
+export const signUpUser = async (req: Request, res: Response) => {
     console.log(req.body);
-    const { userName, password, number, street, city, state, pincode} = req.body.data;
+    const { userName, password, number, street, city, state, pincode, isDriver} = req.body.data;
     const email = req.body.email;
     try {
         console.log(userName);
@@ -57,7 +26,7 @@ export const signupUser = async (req: Request, res: Response) => {
         const hashedPassword = await bcrypt.hash(password, saltRounds);
         console.log(hashedPassword);
         const newUser = await User.create({
-            userName, password: hashedPassword, phone: number, street, city, state, pincode, email
+            userName, password: hashedPassword, phone: number, street, city, state, pincode, isDriver, email
         })
         console.log(newUser);
 

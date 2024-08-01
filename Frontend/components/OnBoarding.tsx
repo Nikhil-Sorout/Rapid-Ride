@@ -6,11 +6,10 @@ import { Link } from 'expo-router'
 interface pageProps {
     title: string,
     index: number,
-    translateX: Animated.SharedValue<number>
 }
 
 
-const onBoarding: React.FC<pageProps> = ({ title, index, translateX }) => {
+const onBoarding: React.FC<pageProps> = ({ title, index}) => {
     const { width, height } = Dimensions.get('window')
     return (
         <View style={{ height: height, width: width, justifyContent: 'center', alignItems: 'center' }}>

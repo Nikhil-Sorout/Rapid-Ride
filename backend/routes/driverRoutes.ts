@@ -1,12 +1,10 @@
 import express from 'express'
-import { verifyEmail } from '../controllers/driverController';
+import { singUpDriver } from '../controllers/driverController';
+
 
 const router = express.Router();
 
-
-router.route('/emailVerification').get(verifyEmail)
-
-// router.route('/signup').post()
+router.route('/signup').post(singUpDriver)
 
 // router.route('/signin').post()
 
