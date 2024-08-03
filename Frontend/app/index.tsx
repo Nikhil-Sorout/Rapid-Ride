@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 
+
+
 export default function Index() {
   const Words = ["Hey", "whats'up", "peeps"]
   const [loading, setLoading] = useState(true);
@@ -34,7 +36,7 @@ export default function Index() {
         router.replace('/(tabs)')
       }
     }
-  },[authenticated, isDriver])
+  }, [authenticated, isDriver])
 
   if (loading) {
     return (

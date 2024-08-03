@@ -5,6 +5,9 @@ import { ActivityIndicator, View } from "react-native";
 
 export default function RootLayout() {
 
+  if (__DEV__) {
+    require("../ReactotronConfig");
+  }
   return (
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />

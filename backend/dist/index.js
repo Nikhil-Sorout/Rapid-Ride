@@ -30,7 +30,7 @@ io.on("connection", (socket) => {
     });
 });
 app.use("/api/common", require('./routes/commonRoutes'));
-app.use("/api/passengers", require('./routes/userRoutes'));
+app.use("/api/passengers", require('./routes/passengerRoutes'));
 app.use("/api/drivers", require('./routes/driverRoutes'));
 server.listen(port, () => {
     console.log("Server is running on: ", port);

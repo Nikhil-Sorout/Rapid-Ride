@@ -12,7 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.signUpUser = void 0;
+exports.seachLocation = exports.signUpUser = void 0;
+const axios_1 = __importDefault(require("axios"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const passengerModel_1 = __importDefault(require("../models/passengerModel"));
@@ -53,3 +54,26 @@ const signUpUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.signUpUser = signUpUser;
+// @desc search location
+// @route GET /api/passengers/searchLocation
+// @access private
+const seachLocation = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.query);
+    const { search } = req.query;
+    try {
+        const response = yield axios_1.default.get('https://api.mapbox.com/search/searchbox/v1/forward', {
+            params: {
+                q: search,
+                access_token: process.env.MAP_BOX_TOKEN,
+                limit: 5
+            }
+        });
+        if (response.status == 200) {
+            res.status(200).json(response.data);
+        }
+    }
+    catch (err) {
+        console.log(err);
+    }
+});
+exports.seachLocation = seachLocation;

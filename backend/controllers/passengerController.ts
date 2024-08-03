@@ -42,3 +42,30 @@ export const signUpUser = async (req: Request, res: Response) => {
     }
 
 }
+
+// @desc search location
+// @route GET /api/passengers/searchLocation
+// @access private
+
+export const seachLocation = async(req: Request, res:Response)=>{
+    console.log(req.query);
+    const {search} = req.query;
+    try{
+        const response = await axios.get('https://api.mapbox.com/search/searchbox/v1/forward',
+            {
+                params:{
+                    q: search,
+                    access_token: process.env.MAP_BOX_TOKEN,
+                    limit: 5
+                }
+            }
+        )
+        if(response.status==200){
+            res.status(200).json(response.data);
+        }
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
+}
